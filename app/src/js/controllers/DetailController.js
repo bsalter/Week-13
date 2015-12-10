@@ -1,5 +1,5 @@
 angular.module('resthitter')
-.controller('DetailController', ['People', '$routeParams', function(People, $routeParams){
+.controller('DetailController', ['People', '$routeParams', '$location', function(People, $routeParams, $location){
   var dc = this;
   //dc.person = {id: 1, name: "Placeholder", twitter: "@placeholder"};
   // $routeParams.id
@@ -9,7 +9,7 @@ angular.module('resthitter')
   dc.save = function(){
     //People.save({}, dc.person, function(){});
     dc.person.$save().then(function(){
-      console.log("success");
+      $location.path('/');
     });
     // POST .../people
   };

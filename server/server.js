@@ -40,9 +40,13 @@ app.get('/people/:id', function(req, res){
 app.post('/people', function(req, res){
   // req.body
   var postedPerson = req.body;
-  console.log(postedPerson);
-  res.end();
-
+  people.forEach(function(person, index){
+    if(person.id == postedPerson.id){
+      people[index] = postedPerson;
+      res.end();
+    }
+  });
+  res.status(404).end();
 });
 
 
