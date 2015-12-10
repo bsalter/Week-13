@@ -59,12 +59,12 @@ app.delete('/people/:id', function(req, res){
   // req.params.id
   people.forEach(function(person, index){
     if(person.id == req.params.id){
-      people.splice(index);
+      people.splice(index, 1);
       res.end();
     }
   });
   res.status(404).end();
-  
+
 });
 
 
