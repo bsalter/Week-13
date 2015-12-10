@@ -3,6 +3,12 @@ var express = require('express');
 var app = express();
 
 app.use(function(req, res, next){
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+app.use(function(req, res, next){
   console.log((new Date()).toString() + " " + req.method + " " + req.url);
   next();
 });
@@ -16,6 +22,15 @@ var people = [
 
 app.get('/people', function(req, res){
   res.json(people);
+});
+
+app.get('/people/:id', function(req, res){
+  // req.params.id
+  people.forEach(function(person){
+    if(person.id == req.params.id){
+      res.json(person);
+    }
+  });
 });
 
 
