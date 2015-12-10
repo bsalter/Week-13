@@ -7,6 +7,7 @@ app.use(bodyParser.json());
 
 app.use(function(req, res, next){
   res.header("Access-Control-Allow-Origin", "*");
+  res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
@@ -40,6 +41,11 @@ app.get('/people/:id', function(req, res){
 app.post('/people', function(req, res){
   // req.body
   var postedPerson = req.body;
+  if(postedPerson.id === undefined){
+    postedPerson.id = people.length + 1;
+    people.push(postedPerson);
+    res.end();
+  }
   people.forEach(function(person, index){
     if(person.id == postedPerson.id){
       people[index] = postedPerson;
@@ -47,6 +53,18 @@ app.post('/people', function(req, res){
     }
   });
   res.status(404).end();
+});
+
+app.delete('/people/:id', function(req, res){
+  // req.params.id
+  people.forEach(function(person, index){
+    if(person.id == req.params.id){
+      people.splice(index);
+      res.end();
+    }
+  });
+  res.status(404).end();
+  
 });
 
 

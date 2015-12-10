@@ -17,4 +17,10 @@ angular.module('resthitter').controller('ListController', ['People', function(Pe
   // POST localhost:7000/people
   // People.delete({id: 1})
   // DELETE localhost:7000/people/1
+
+  lc.delete = function(id){
+    People.delete({id: id}, function(){
+      
+    });
+  };
 }]);

@@ -3,8 +3,13 @@ angular.module('resthitter')
   var dc = this;
   //dc.person = {id: 1, name: "Placeholder", twitter: "@placeholder"};
   // $routeParams.id
-  dc.person = People.get({id: $routeParams.id});
-  // GET localhost:7000/people/1
+
+  if($routeParams.id !== undefined){
+    dc.person = People.get({id: $routeParams.id});
+    // GET localhost:7000/people/1
+  } else {
+    dc.person = new People();
+  }
 
   dc.save = function(){
     //People.save({}, dc.person, function(){});
